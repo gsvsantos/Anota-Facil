@@ -16,7 +16,7 @@ import { MatIcon } from '@angular/material/icon';
     MatButtonModule,
     MatIcon,
   ],
-  templateUrl: './inicio.html',
-  styleUrl: './inicio.scss',
+  templateUrl: './inicio.component.html',
+  styleUrl: './inicio.component.scss',
 })
 export class Inicio {}
