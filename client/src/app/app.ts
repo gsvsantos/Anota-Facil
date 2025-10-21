@@ -3,10 +3,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { ShellComponent } from "./components/shell/shell.component";
 
 @Component({
   selector: 'app-root',
-  imports: [MatButtonModule, MatDividerModule, MatIconModule, MatCardModule],
+  imports: [MatButtonModule, MatDividerModule, MatIconModule, MatCardModule, ShellComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
