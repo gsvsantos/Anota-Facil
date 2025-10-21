@@ -48,5 +48,5 @@ export default defineConfig(
       // Ajuste exceções p/ índices de loops, etc.
       'id-length': ['warn', { min: 3, exceptions: ['i', 'j', 'k', 'x', 'y', 'id'] }],
     },
-  }
+  },
 );
