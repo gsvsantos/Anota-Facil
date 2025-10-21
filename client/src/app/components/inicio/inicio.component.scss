@@ -1,0 +1,96 @@
+@use '@angular/material' as mat;
+.intro-section {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1.5rem;
+
+  &_text {
+    flex: 2;
+    min-width: 300px;
+
+    p,
+    ul {
+      font-size: 1rem;
+    }
+    p:first-of-type {
+      margin-top: 1.5rem;
+    }
+  }
+  &_image {
+    flex: 1;
+    max-width: 220px;
+  }
+}
+
+.img {
+  max-width: 100%;
+  height: auto;
+}
+
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-block: 0.75rem;
+}
+
+.classroom-card {
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  .card-hero {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 5;
+    background: center / cover no-repeat var(--hero-url, url('/img/img_read.jpg'));
+    cursor: pointer;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.6) 100%);
+    }
+
+    &_title {
+      position: absolute;
+      left: 16px;
+      top: 16px;
+      color: #fff;
+      font-size: large;
+      z-index: 1;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  mat-card-content {
+    min-height: 150px;
+  }
+
+  .card-actions {
+    padding: 4px 8px;
+    .spacer {
+      flex: 1 1 auto;
+    }
+  }
+}
+
+@media screen and (min-width: 660px) {
+  .card-column {
+    flex: 0 0 330px;
+    max-width: 330px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .card .col {
+    flex-basis: 100%;
+    text-align: center;
+  }
+}

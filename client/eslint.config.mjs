@@ -30,6 +30,14 @@ export default defineConfig(
           // allowedNames: ['map', 'filter', 'reduce']
         },
       ],
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+        },
+      ],
 
       // EXIGE tipo de parâmetros/retorno nas bordas do módulo (APIs exportadas)
       '@typescript-eslint/explicit-module-boundary-types': 'error',

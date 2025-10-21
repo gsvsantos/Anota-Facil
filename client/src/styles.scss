@@ -1,30 +1,70 @@
-// https://material.angular.dev/guide/theming
+@use './styles/material-theme';
+@use './styles/tokens';
 @use '@angular/material' as mat;
-@use './variaveis' as *;
 
-html {
-  @include mat.theme(
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font: var(--mat-sys-body-medium);
+  background: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+}
+
+.mat-primary {
+  @include mat.button-overrides(
     (
-      color: (
-        primary: mat.$magenta-palette,
-        tertiary: mat.$violet-palette,
-      ),
-      typography: Roboto,
-      density: 0,
+      filled-container-color: var(--mat-sys-primary),
+      filled-label-text-color: var(--mat-sys-on-primary),
+      outlined-label-text-color: var(--mat-sys-primary),
+      text-label-text-color: var(--mat-sys-primary),
     )
   );
 }
 
-body {
-  color-scheme: light;
-  // https://material.angular.dev/guide/system-variables
-  background-color: var(--mat-sys-surface);
-  color: var(--mat-sys-on-surface);
-  font: var(--mat-sys-body-medium);
-  // Reset the user agent margin.
-  margin: 0;
+.mat-secondary {
+  @include mat.button-overrides(
+    (
+      filled-container-color: var(--mat-sys-secondary),
+      filled-label-text-color: var(--mat-sys-on-secondary),
+      outlined-label-text-color: var(--mat-sys-secondary),
+      text-label-text-color: var(--mat-sys-secondary),
+    )
+  );
 }
-html,
-body {
-  height: 100%;
+
+.mat-tertiary {
+  @include mat.button-overrides(
+    (
+      filled-container-color: var(--mat-sys-tertiary),
+      filled-label-text-color: var(--mat-sys-on-tertiary),
+      outlined-label-text-color: var(--mat-sys-tertiary),
+      text-label-text-color: var(--mat-sys-tertiary),
+    )
+  );
+}
+
+.mat-warn,
+.mat-error {
+  @include mat.button-overrides(
+    (
+      filled-container-color: var(--mat-sys-error),
+      filled-label-text-color: var(--mat-sys-on-error),
+      outlined-label-text-color: var(--mat-sys-error),
+      text-label-text-color: var(--mat-sys-error),
+    )
+  );
+}
+
+.btn-surface {
+  @include mat.button-overrides(
+    (
+      filled-container-color: var(--mat-sys-surface-variant),
+      filled-label-text-color: var(--mat-sys-on-surface-variant),
+      outlined-label-text-color: var(--mat-sys-on-surface),
+      text-label-text-color: var(--mat-sys-on-surface),
+    )
+  );
 }

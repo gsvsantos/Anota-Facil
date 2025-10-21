@@ -24,7 +24,14 @@
         </button>
       }
       <span>Anota Fácil</span>
+      <p class="theme-toggle">
+        <mat-icon>light_mode</mat-icon>
+        <mat-slide-toggle (change)="onThemeChange($event)"></mat-slide-toggle>
+        <mat-icon>dark_mode</mat-icon>
+      </p>
     </mat-toolbar>
-    <!-- Add Content Here -->
+    <div class="conteudo">
+      <ng-content></ng-content>
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
