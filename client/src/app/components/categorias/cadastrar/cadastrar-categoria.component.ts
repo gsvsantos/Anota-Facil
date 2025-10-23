@@ -11,7 +11,7 @@ import { finalize } from 'rxjs';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-cadastrar-categoria',
+  selector: 'af-cadastrar-categoria',
   imports: [
     MatCardModule,
     MatButtonModule,
@@ -21,8 +21,8 @@ import { Router, RouterLink } from '@angular/router';
     RouterLink,
     ReactiveFormsModule,
   ],
-  templateUrl: './cadastrar-categoria.html',
-  styleUrl: './cadastrar-categoria.scss',
+  templateUrl: './cadastrar-categoria.component.html',
+  styleUrl: './cadastrar-categoria.component.scss',
 })
 export class CadastrarCategoria {
   private readonly categoriaService = inject(CategoriaService);

@@ -1,18 +1,19 @@
-<section class="main row justify-content-center">
-  <div class="content col-lg-8">
+<section class="listagem-section">
+  <div class="main-content">
     <h2>Categorias</h2>
-    <div class="itens row g-1 m-3">
-      <a class="botao col-lg-2" routerLink="cadastrar" mat-flat-button>
+
+    <div class="itens">
+      <a class="botao" routerLink="cadastrar" mat-flat-button>
         <mat-icon>add</mat-icon>
         Cadastrar
       </a>
     </div>
     <hr />
 
-    <div class="lista row g-3">
+    <div class="lista">
       @for (categoria of categorias$ | async; track $index) {
-        <div class="item col-lg-4">
-          <mat-card class="p-1">
+        <div class="item">
+          <mat-card>
             <mat-card-header>
               <mat-card-title>{{ categoria.titulo }}</mat-card-title>
             </mat-card-header>
@@ -24,7 +25,7 @@
                 <mat-icon>edit</mat-icon>
               </a>
               <a
-                class="botao btn-danger ms-1"
+                class="botao botao--danger"
                 [routerLink]="['excluir', categoria.id]"
                 mat-icon-button
                 matTooltip="Excluir"

@@ -13,7 +13,7 @@ import {
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-listar-categorias',
+  selector: 'af-listar-categorias',
   imports: [
     MatButtonModule,
     AsyncPipe,
@@ -25,8 +25,8 @@ import { RouterLink } from '@angular/router';
     MatCardActions,
     MatCardTitle,
   ],
-  templateUrl: './listar-categorias.html',
-  styleUrl: './listar-categorias.scss',
+  templateUrl: './listar-categorias.component.html',
+  styleUrl: './listar-categorias.component.scss',
 })
 export class ListarCategorias {
   protected readonly categoriaService = inject(CategoriaService);
