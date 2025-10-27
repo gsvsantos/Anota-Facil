@@ -16,6 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { CategoriaService } from '../../../services/categoria.service';
 import { Observer } from 'rxjs';
 import { Router, RouterLink } from '@angular/router';
+import { NotificacaoService } from '../../../services/notificacao.service';
 
 @Component({
   selector: 'af-cadastrar-categoria',
@@ -32,6 +33,7 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './cadastrar-categoria.component.scss',
 })
 export class CadastrarCategoria {
+  private readonly notificacaoService = inject(NotificacaoService);
   private readonly categoriaService = inject(CategoriaService);
   private readonly formBuilder = inject(FormBuilder);
   private readonly router = inject(Router);
@@ -51,8 +53,12 @@ export class CadastrarCategoria {
       .value as CadastrarCategoriaModel;
 
     const cadastroObserver: Observer<CadastrarCategoriaApiResponse> = {
-      next: (res) => console.log(res),
-      error: (err) => console.error('Ocorreu um erro na observable:', err),
+      next: () =>
+        this.notificacaoService.sucesso(
+          `Registro "${cadastrarCategoriaModel.titulo}" cadastrado com sucesso!`,
+          'OK',
+        ),
+      error: (err: string) => this.notificacaoService.erro(err, 'OK'),
       complete: () => void this.router.navigate(['/categorias']),
     };
 

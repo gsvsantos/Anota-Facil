@@ -7,6 +7,7 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './routes/app.routes';
 import { provideHttpClient } from '@angular/common/http';
+import { provideNotification } from './providers/notificacao.provider';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,5 +15,6 @@ export const appConfig: ApplicationConfig = {
     provideZonelessChangeDetection(),
     provideRouter(routes),
     provideHttpClient(),
+    provideNotification(),
   ],
 };

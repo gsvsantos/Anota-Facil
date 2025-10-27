@@ -12,7 +12,7 @@
           <mat-form-field appearance="outline" class="form-field">
             <mat-label>Título da Categoria</mat-label>
             <input matInput formControlName="titulo" type="text" />
-            @if (formGroup.get('titulo')?.errors?.['minlength']) {
+            @if (titulo?.errors?.['minlength']) {
               <mat-error>O título da categoria precisa conter ao menos 3 caracteres.</mat-error>
             }
           </mat-form-field>
