@@ -1,7 +1,13 @@
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { CadastrarCategoriaModel } from '../../../models/categoria.models';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -29,7 +35,13 @@ export class CadastrarCategoria {
   private readonly formBuilder = inject(FormBuilder);
   private readonly router = inject(Router);
 
-  protected formGroup: FormGroup = this.formBuilder.group({ titulo: [''] });
+  protected formGroup: FormGroup = this.formBuilder.group({
+    titulo: ['', [Validators.required.bind(this), Validators.minLength(3)]],
+  });
+
+  public get titulo(): AbstractControl<unknown, unknown, unknown> | null {
+    return this.formGroup.get('titulo' as const);
+  }
 
   public cadastrar(): void {
     if (this.formGroup.invalid) return;
