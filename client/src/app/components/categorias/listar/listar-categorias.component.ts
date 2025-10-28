@@ -1,7 +1,7 @@
+import { ListagemCategoriasModel } from './../../../models/categoria.models';
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { CategoriaService } from '../../../services/categoria.service';
 import { MatIcon } from '@angular/material/icon';
 import {
   MatCard,
@@ -10,7 +10,8 @@ import {
   MatCardActions,
   MatCardTitle,
 } from '@angular/material/card';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { filter, map } from 'rxjs';
 
 @Component({
   selector: 'af-listar-categorias',
@@ -29,7 +30,10 @@ import { RouterLink } from '@angular/router';
   styleUrl: './listar-categorias.component.scss',
 })
 export class ListarCategorias {
-  protected readonly categoriaService = inject(CategoriaService);
+  protected readonly route = inject(ActivatedRoute);
 
-  protected readonly categorias$ = this.categoriaService.selecionarTodas();
+  protected readonly categorias$ = this.route.data.pipe(
+    filter((data) => data['categorias'] as boolean),
+    map((data) => data['categorias'] as ListagemCategoriasModel[]),
+  );
 }

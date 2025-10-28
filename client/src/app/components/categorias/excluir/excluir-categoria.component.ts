@@ -10,6 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { DetalhesCategoriaApiResponse } from '../../../models/categoria.models';
 
 @Component({
   selector: 'af-excluir-categoria.component',
@@ -32,10 +33,9 @@ export class ExcluirCategoria {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
 
-  protected readonly categoria$ = this.route.paramMap.pipe(
-    filter((params) => params.has('id')),
-    map((params) => params.get('id')!),
-    switchMap((id) => this.categoriaService.selecionarPorId(id)),
+  protected readonly categoria$ = this.route.data.pipe(
+    filter((data) => data['categoria'] as boolean),
+    map((data) => data['categoria'] as DetalhesCategoriaApiResponse),
     shareReplay({ bufferSize: 1, refCount: true }),
   );
 

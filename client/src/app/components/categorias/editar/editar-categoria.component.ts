@@ -1,4 +1,5 @@
 import {
+  DetalhesCategoriaApiResponse,
   EditarCategoriaApiResponse,
   EditarCategoriaModel,
 } from './../../../models/categoria.models';
@@ -47,10 +48,9 @@ export class EditarCategoria {
     titulo: ['', [Validators.required.bind(this), Validators.minLength(3)]],
   });
 
-  protected readonly categoria$ = this.route.paramMap.pipe(
-    filter((params) => params.has('id')),
-    map((params) => params.get('id')!),
-    switchMap((id) => this.categoriaService.selecionarPorId(id)),
+  protected readonly categoria$ = this.route.data.pipe(
+    filter((data) => data['categoria'] as boolean),
+    map((data) => data['categoria'] as DetalhesCategoriaApiResponse),
     tap((categoria) => this.formGroup.patchValue(categoria)),
     shareReplay({ bufferSize: 1, refCount: true }),
   );
