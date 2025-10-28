@@ -36,6 +36,12 @@ export class CategoriaService {
     return this.http.put<EditarCategoriaApiResponse>(url, categoriaModel);
   }
 
+  public excluir(id: string): Observable<null> {
+    const url = `${this.apiUrl}/${id}`;
+
+    return this.http.delete<null>(url);
+  }
+
   public selecionarPorId(id: string): Observable<DetalhesCategoriaApiResponse> {
     const url = `${this.apiUrl}/${id}`;
 
