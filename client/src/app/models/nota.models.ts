@@ -5,16 +5,19 @@ export interface CadastrarNotaApiResponse {
 export interface CadastrarNotaModel {
   titulo: string;
   conteudo: string;
+  categoriaId: string;
 }
 
 export interface EditarNotaApiResponse {
   titulo: string;
   conteudo: string;
+  categoriaId: string;
 }
 
 export interface EditarNotaModel {
   titulo: string;
   conteudo: string;
+  categoriaId: string;
 }
 
 export interface DetalhesNotaApiResponse {
