@@ -43,7 +43,7 @@ export class CadastrarCategoria {
   });
 
   public get titulo(): AbstractControl<unknown, unknown, unknown> | null {
-    return this.formGroup.get('titulo' as const);
+    return this.formGroup.get('titulo');
   }
 
   public cadastrar(): void {
