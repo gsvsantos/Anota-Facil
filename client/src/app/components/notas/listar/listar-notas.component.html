@@ -1,0 +1,45 @@
+<section class="listagem-section">
+  <div class="main-content">
+    <h2>Notas</h2>
+
+    <div class="itens">
+      <a class="botao" routerLink="cadastrar" mat-flat-button>
+        <mat-icon>add</mat-icon>
+        Cadastrar
+      </a>
+    </div>
+
+    <hr />
+
+    <div class="lista">
+      @for (nota of notas$ | async; track $index) {
+        <div class="item">
+          <mat-card class="card">
+            <mat-card-header>
+              <mat-card-title>{{ nota.titulo }}</mat-card-title>
+              <mat-chip class="chip-categoria"> {{ nota.categoria }}</mat-chip>
+            </mat-card-header>
+
+            <mat-card-content class="card-content">
+              <span> {{ nota.conteudo }}</span>
+            </mat-card-content>
+
+            <mat-card-actions align="end">
+              <a [routerLink]="['editar', nota.id]" mat-icon-button matTooltip="Editar">
+                <mat-icon>edit</mat-icon>
+              </a>
+              <a
+                class="botao botao__danger"
+                [routerLink]="['excluir', nota.id]"
+                mat-icon-button
+                matTooltip="Excluir"
+              >
+                <mat-icon>delete</mat-icon>
+              </a>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      }
+    </div>
+  </div>
+</section>
