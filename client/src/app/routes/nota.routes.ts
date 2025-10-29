@@ -7,6 +7,7 @@ import { ListagemCategoriasModel } from '../models/categoria.models';
 import { CategoriaService } from '../services/categoria.service';
 import { CadastrarNota } from '../components/notas/cadastrar/cadastrar-nota.component';
 import { EditarNota } from '../components/notas/editar/editar-nota.component';
+import { ExcluirNota } from '../components/notas/excluir/excluir-nota.component';
 
 const listagemNotasResolver: ResolveFn<ListagemNotasModel[]> = () => {
   const notaService = inject(NotaService);
@@ -44,6 +45,11 @@ export const notaRoutes: Routes = [
         path: 'editar/:id',
         component: EditarNota,
         resolve: { nota: detalhesNotaResolver, categorias: listagemCategoriasResolver },
+      },
+      {
+        path: 'excluir/:id',
+        component: ExcluirNota,
+        resolve: { nota: detalhesNotaResolver },
       },
     ],
     providers: [CategoriaService, NotaService],
