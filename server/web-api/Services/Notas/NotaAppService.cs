@@ -86,10 +86,12 @@ public class NotaAppService(
         try
         {
             notaSelecionada.Titulo = command.Titulo;
+            notaSelecionada.Conteudo = command.Conteudo;
+            notaSelecionada.CategoriaId = command.CategoriaId;
 
             await dbContext.SaveChangesAsync(cancellationToken);
 
-            EditarNotaResult result = new(notaSelecionada.Titulo, notaSelecionada.Conteudo, notaSelecionada.Categoria!.Titulo);
+            EditarNotaResult result = new(notaSelecionada.Titulo, notaSelecionada.Conteudo, notaSelecionada.CategoriaId);
 
             return Result.Ok(result);
         }

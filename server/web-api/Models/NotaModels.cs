@@ -1,4 +1,4 @@
-﻿using NoteKeeper.WebApi.Services.Categorias;
+using NoteKeeper.WebApi.Services.Categorias;
 using NoteKeeper.WebApi.Services.Notas;
 
 namespace NoteKeeper.WebApi.Models;
@@ -8,8 +8,8 @@ public abstract record BaseNotaRequest(string Titulo, string Conteudo, Guid Cate
 public record CadastrarNotaRequest(string Titulo, string Conteudo, Guid CategoriaId) : BaseNotaRequest(Titulo, Conteudo, CategoriaId);
 public record CadastrarNotaResponse(Guid Id);
 
-public record EditarNotaRequest(Guid Id, string Titulo, string Conteudo, Guid CategoriaId) : BaseNotaRequest(Titulo, Conteudo, CategoriaId);
-public record EditarNotaResponse(string Titulo, string Conteudo, string Categoria);
+public record EditarNotaRequest(string Titulo, string Conteudo, Guid CategoriaId) : BaseNotaRequest(Titulo, Conteudo, CategoriaId);
+public record EditarNotaResponse(string Titulo, string Conteudo, Guid CategoriaId);
 
 public record ExcluirNotaRequest(Guid Id);
 public record ExcluirNotaResponse();
