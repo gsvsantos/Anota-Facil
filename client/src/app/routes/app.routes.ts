@@ -11,4 +11,8 @@ export const routes: Routes = [
     path: 'categorias',
     loadChildren: () => import('../routes/categoria.routes').then((route) => route.categoriaRoutes),
   },
+  {
+    path: 'notas',
+    loadChildren: () => import('../routes/nota.routes').then((route) => route.notaRoutes),
+  },
 ];
