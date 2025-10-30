@@ -2,6 +2,7 @@ using FluentResults;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using NoteKeeper.WebApi.Domain;
+using NoteKeeper.WebApi.Domain.Auth;
 using NoteKeeper.WebApi.Orm;
 using System.Collections.Immutable;
 
@@ -9,6 +10,7 @@ namespace NoteKeeper.WebApi.Services.Categorias;
 
 public class CategoriaAppService(
     AppDbContext dbContext,
+    ITenantProvider tenantProvider,
     IValidator<BaseCategoriaCommand> validator,
     ILogger<CategoriaAppService> logger
 )
@@ -33,6 +35,7 @@ public class CategoriaAppService(
             return Result.Fail(ResultadosErro.RegistroDuplicadoErro($"Já existe uma categoria com o título \"{command.Titulo}\""));
 
         Categoria categoria = new(command.Titulo);
+        categoria.UsuarioId = tenantProvider.UsuarioId.GetValueOrDefault();
 
         try
         {

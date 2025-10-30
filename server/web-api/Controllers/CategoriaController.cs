@@ -1,4 +1,5 @@
 using FluentResults;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NoteKeeper.WebApi.Models;
 using NoteKeeper.WebApi.Services.Categorias;
@@ -6,6 +7,7 @@ using NoteKeeper.WebApi.Services.Categorias;
 namespace NoteKeeper.WebApi.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("categorias")]
 public class CategoriaController(CategoriaAppService categoriaService) : Controller
 {

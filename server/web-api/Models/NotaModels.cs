@@ -1,4 +1,4 @@
-using NoteKeeper.WebApi.Services.Categorias;
+﻿using NoteKeeper.WebApi.Services.Categorias;
 using NoteKeeper.WebApi.Services.Notas;
 
 namespace NoteKeeper.WebApi.Models;

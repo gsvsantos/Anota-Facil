@@ -2,6 +2,7 @@ using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using NoteKeeper.WebApi.Config;
 using NoteKeeper.WebApi.Orm;
+using NoteKeeper.WebApi.Services.Auth;
 using NoteKeeper.WebApi.Services.Categorias;
 using NoteKeeper.WebApi.Services.Notas;
 
@@ -14,17 +15,19 @@ public class Program
         WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
         // Injeção de Dependências
-        builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
+        builder.Services.AddIdentityProviderConfig(builder.Configuration);
 
         builder.Services.AddScoped<CategoriaAppService>();
         builder.Services.AddScoped<NotaAppService>();
+        builder.Services.AddScoped<AutenticacaoAppService>();
 
-        builder.Services
-            .AddCamadaInfraestruturaOrm(builder.Configuration);
+        builder.Services.AddCamadaInfraestruturaOrm(builder.Configuration);
+
+        builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
+
+        builder.Services.AddSwaggerConfig();
 
         builder.Services.AddControllers();
-        builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen();
 
         WebApplication app = builder.Build();
 
@@ -54,6 +57,7 @@ public class Program
 
         app.UseHttpsRedirection();
 
+        app.UseAuthentication();
         app.UseAuthorization();
 
         app.MapControllers();
