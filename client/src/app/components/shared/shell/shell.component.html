@@ -7,7 +7,7 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="(isHandset$ | async) === false"
   >
-    <mat-toolbar>Menu</mat-toolbar>
+    <mat-toolbar><mat-icon>collections_bookmark</mat-icon>Anota Fácil</mat-toolbar>
     <mat-nav-list>
       @for (item of itensNavbar; track $index) {
         <a mat-list-item [routerLink]="item.link"
@@ -15,6 +15,19 @@
         >
       }
     </mat-nav-list>
+
+    <div class="profile">
+      <button class="button-profile" mat-raised-button [matMenuTriggerFor]="opcoesUsuario">
+        <mat-icon>person</mat-icon>
+        {{ usuarioAutenticado!.nomeCompleto }}
+      </button>
+      <mat-menu #opcoesUsuario="matMenu" xPosition="before">
+        <button mat-menu-item style="min-width: 160px" (click)="logoutRequisitado.emit()">
+          <mat-icon>arrow_backwards</mat-icon>
+          Logout
+        </button>
+      </mat-menu>
+    </div>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
@@ -23,30 +36,15 @@
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
       }
-      <span> <mat-icon>collections_bookmark</mat-icon>Anota Fácil</span>
-
-      <button
-        class="ms-auto"
-        style="min-width: 180px"
-        mat-raised-button
-        [matMenuTriggerFor]="opcoesUsuario"
-      >
-        <mat-icon>person</mat-icon>
-        {{ usuarioAutenticado!.nomeCompleto }}
-      </button>
-      <mat-menu #opcoesUsuario="matMenu">
-        <button mat-menu-item style="min-width: 160px" (click)="logoutRequisitado.emit()">
-          <mat-icon>arrow_backwards</mat-icon>
-          Logout
-        </button>
-      </mat-menu>
-
       <p class="theme-toggle">
         <mat-icon>light_mode</mat-icon>
         <mat-slide-toggle (change)="onThemeChange($event)"></mat-slide-toggle>
         <mat-icon>dark_mode</mat-icon>
       </p>
     </mat-toolbar>
+    <svg class="borda-svg" height="32" width="32">
+      <path class="OkLq5b" d="M 32,0 H -32,0 V 0,32 a 32, 32 0 0, 1 32,-32"></path>
+    </svg>
     <div class="conteudo">
       <ng-content></ng-content>
     </div>
