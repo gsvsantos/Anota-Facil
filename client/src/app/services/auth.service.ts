@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, shareReplay, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { obterOpcoesHeaderAutorizacao } from '../utils/obter-header-autorizacao';
 
 @Injectable()
 export class AuthService {
@@ -37,7 +38,11 @@ export class AuthService {
     const urlCompleto = `${this.apiUrl}/sair`;
 
     return this.http
-      .post<null>(urlCompleto, {})
+      .post<null>(
+        urlCompleto,
+        {},
+        obterOpcoesHeaderAutorizacao(this.accessTokenSubject$.getValue()),
+      )
       .pipe(tap(() => this.accessTokenSubject$.next(undefined)));
   }
 }
