@@ -1,3 +1,9 @@
-<af-shell>
-  <router-outlet />
-</af-shell>
+@if (accessToken$ | async; as accessToken) {
+  <af-shell [usuarioAutenticado]="accessToken.usuarioAutenticado" (logoutRequisitado)="logout()">
+    <router-outlet />
+  </af-shell>
+} @else {
+  <main class="main">
+    <router-outlet />
+  </main>
+}

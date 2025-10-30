@@ -8,6 +8,7 @@ import { provideRouter } from '@angular/router';
 import { routes } from './routes/app.routes';
 import { provideHttpClient } from '@angular/common/http';
 import { provideNotification } from './providers/notificacao.provider';
+import { provideAuth } from './providers/auth.provider';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,5 +17,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(),
     provideNotification(),
+    provideAuth()
   ],
 };
