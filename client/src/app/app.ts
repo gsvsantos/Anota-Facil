@@ -1,8 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { ShellComponent } from './components/shared/shell/shell.component';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
 import { AuthService } from './services/auth.service';
+import { PartialObserver } from 'rxjs';
+import { NotificacaoService } from './services/notificacao.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -12,8 +15,16 @@ import { AuthService } from './services/auth.service';
 })
 export class App {
   private readonly authService = inject(AuthService);
-
+  protected readonly router = inject(Router);
   protected readonly accessToken$ = this.authService.accessToken$;
+  protected readonly notificacaoService = inject(NotificacaoService);
 
-  public logout(): void {}
+  public logout(): void {
+    const sairObserver: PartialObserver<null> = {
+      error: (err: HttpErrorResponse) => this.notificacaoService.erro(err.message, 'OK'),
+      complete: () => void this.router.navigate(['/auth/login']),
+    };
+
+    this.authService.sair().subscribe(sairObserver);
+  }
 }

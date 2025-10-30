@@ -1,4 +1,4 @@
-import { RegistroModel, AccessTokenModel } from './../models/auth.models';
+import { RegistroModel, AccessTokenModel, LoginModel } from './../models/auth.models';
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, shareReplay, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -23,5 +23,21 @@ export class AuthService {
     return this.http
       .post<AccessTokenModel>(url, registroModel)
       .pipe(tap((token) => this.accessTokenSubject$.next(token)));
+  }
+
+  public login(loginModel: LoginModel): Observable<AccessTokenModel> {
+    const url = `${this.apiUrl}/login`;
+
+    return this.http
+      .post<AccessTokenModel>(url, loginModel)
+      .pipe(tap((token) => this.accessTokenSubject$.next(token)));
+  }
+
+  public sair(): Observable<null> {
+    const urlCompleto = `${this.apiUrl}/sair`;
+
+    return this.http
+      .post<null>(urlCompleto, {})
+      .pipe(tap(() => this.accessTokenSubject$.next(undefined)));
   }
 }
