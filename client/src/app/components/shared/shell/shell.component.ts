@@ -1,4 +1,5 @@
-import { Component, DOCUMENT, inject } from '@angular/core';
+import { UsuarioAutenticadoModel } from './../../../models/auth.models';
+import { Component, DOCUMENT, EventEmitter, inject, Input, Output } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { AsyncPipe } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -10,6 +11,7 @@ import { MatSlideToggleChange, MatSlideToggleModule } from '@angular/material/sl
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { RouterLink } from '@angular/router';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'af-shell',
@@ -22,6 +24,7 @@ import { RouterLink } from '@angular/router';
     MatListModule,
     MatIconModule,
     MatSlideToggleModule,
+    MatMenuModule,
     AsyncPipe,
     RouterLink,
   ],
@@ -29,6 +32,9 @@ import { RouterLink } from '@angular/router';
 export class ShellComponent {
   private breakpointObserver = inject(BreakpointObserver);
   private document = inject(DOCUMENT);
+
+  @Input({ required: true }) public usuarioAutenticado?: UsuarioAutenticadoModel;
+  @Output() public logoutRequisitado = new EventEmitter<void>();
 
   public isHandset$: Observable<boolean> = this.breakpointObserver
     .observe([Breakpoints.XSmall, Breakpoints.Small, Breakpoints.Handset])

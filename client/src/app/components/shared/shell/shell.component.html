@@ -23,7 +23,24 @@
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
       }
-      <span>Anota Fácil</span>
+      <span> <mat-icon>collections_bookmark</mat-icon>Anota Fácil</span>
+
+      <button
+        class="ms-auto"
+        style="min-width: 180px"
+        mat-raised-button
+        [matMenuTriggerFor]="opcoesUsuario"
+      >
+        <mat-icon>person</mat-icon>
+        {{ usuarioAutenticado!.nomeCompleto }}
+      </button>
+      <mat-menu #opcoesUsuario="matMenu">
+        <button mat-menu-item style="min-width: 160px" (click)="logoutRequisitado.emit()">
+          <mat-icon>arrow_backwards</mat-icon>
+          Logout
+        </button>
+      </mat-menu>
+
       <p class="theme-toggle">
         <mat-icon>light_mode</mat-icon>
         <mat-slide-toggle (change)="onThemeChange($event)"></mat-slide-toggle>

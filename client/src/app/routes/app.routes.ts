@@ -1,7 +1,11 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'inicio', pathMatch: 'full' },
+  { path: '', redirectTo: 'auth/registro', pathMatch: 'full' },
+  {
+    path: 'auth',
+    loadChildren: () => import('../routes/auth.routes').then((route) => route.authRoutes),
+  },
   {
     path: 'inicio',
     loadComponent: () =>
