@@ -3,20 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NoteKeeper.WebApi.Orm;
 
 #nullable disable
 
-namespace NoteKeeper.WebApi.Orm.Migrations
+namespace NoteKeeper.WebApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251030152610_Add_InitialConfig")]
-    partial class Add_InitialConfig
+    partial class AppDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
