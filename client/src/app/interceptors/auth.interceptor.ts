@@ -1,13 +1,17 @@
-import { HttpRequest, HttpHandlerFn, HttpEvent } from '@angular/common/http';
+import { HttpRequest, HttpHandlerFn, HttpEvent, HttpErrorResponse } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
+import { NotificacaoService } from '../services/notificacao.service';
 
 export const authInterceptor = (
   req: HttpRequest<unknown>,
   next: HttpHandlerFn,
 ): Observable<HttpEvent<unknown>> => {
   const authService = inject(AuthService);
+  const notificacaoService = inject(NotificacaoService);
+  const router = inject(Router);
 
   const accessToken = authService.accessTokenSubject$.getValue();
 
@@ -16,7 +20,17 @@ export const authInterceptor = (
       headers: req.headers.set('Authorization', `Bearer ${accessToken.chave}`),
     });
 
-    return next(requisicaoClonada);
+    return next(requisicaoClonada).pipe(
+      catchError((err: HttpErrorResponse) => {
+        if (err.status === 401) {
+          notificacaoService.erro('Autenticação expirada. Faça o login novamente!', 'OK');
+          authService.accessTokenSubject$.next(undefined);
+          void router.navigate(['/auth', 'login']);
+        }
+
+        return throwError(() => err);
+      }),
+    );
   }
 
   return next(req);
