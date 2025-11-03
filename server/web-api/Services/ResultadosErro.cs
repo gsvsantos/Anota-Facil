@@ -39,14 +39,12 @@ public abstract class ResultadosErro
             .WithMetadata("TipoErro", "RegistroNaoEncontrado");
     }
 
-
     public static Error ExclusaoBloqueadaErro(string mensagemErro)
     {
         return new Error("Exclusão bloqueada")
             .CausedBy(mensagemErro)
             .WithMetadata("TipoErro", "ExclusaoBloqueada");
     }
-
 
     public static Error ExcecaoInternaErro(Exception ex)
     {

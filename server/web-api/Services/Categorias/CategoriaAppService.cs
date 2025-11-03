@@ -32,10 +32,14 @@ public class CategoriaAppService(
         }
 
         if (dbContext.Categorias.Any(c => c.Titulo.Equals(command.Titulo)))
+        {
             return Result.Fail(ResultadosErro.RegistroDuplicadoErro($"Já existe uma categoria com o título \"{command.Titulo}\""));
+        }
 
-        Categoria categoria = new(command.Titulo);
-        categoria.UsuarioId = tenantProvider.UsuarioId.GetValueOrDefault();
+        Categoria categoria = new(command.Titulo)
+        {
+            UsuarioId = tenantProvider.UsuarioId.GetValueOrDefault()
+        };
 
         try
         {
@@ -76,13 +80,17 @@ public class CategoriaAppService(
         }
 
         if (dbContext.Categorias.Any(c => !c.Id.Equals(command.Id) && c.Titulo.Equals(command.Titulo)))
+        {
             return Result.Fail(ResultadosErro.RegistroDuplicadoErro($"Já existe uma categoria com o título \"{command.Titulo}\""));
+        }
 
         Categoria? categoriaSelecionada = await dbContext.Categorias
             .FirstOrDefaultAsync(x => x.Id.Equals(command.Id), cancellationToken);
 
         if (categoriaSelecionada is null)
+        {
             return Result.Fail(ResultadosErro.RegistroNaoEncontradoErro(command.Id));
+        }
 
         try
         {
@@ -115,7 +123,9 @@ public class CategoriaAppService(
             .FirstOrDefaultAsync(x => x.Id.Equals(command.Id), cancellationToken);
 
         if (categoriaSelecionada is null)
+        {
             return Result.Fail($"Categoria {command.Id} não encontrada");
+        }
 
         dbContext.Remove(categoriaSelecionada);
 
@@ -141,7 +151,9 @@ public class CategoriaAppService(
             .FirstOrDefaultAsync(x => x.Id.Equals(command.Id), cancellationToken);
 
         if (categoriaSelecionada is null)
+        {
             return Result.Fail($"Categoria {command.Id} não encontrada");
+        }
 
         SelecionarCategoriaPorIdResult result = new(categoriaSelecionada.Id, categoriaSelecionada.Titulo);
 

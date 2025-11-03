@@ -15,8 +15,8 @@ public class Nota : Entidade
 
     public Nota(string titulo, string conteudo, Guid categoriaId) : this()
     {
-        Titulo = titulo;
-        Conteudo = conteudo;
-        CategoriaId = categoriaId;
+        this.Titulo = titulo;
+        this.Conteudo = conteudo;
+        this.CategoriaId = categoriaId;
     }
 }

@@ -12,8 +12,8 @@ using NoteKeeper.WebApi.Orm;
 namespace NoteKeeper.WebApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251030175705_InitialConfig")]
-    partial class InitialConfig
+    [Migration("20251103191734_Initial_Config")]
+    partial class Initial_Config
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

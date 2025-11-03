@@ -48,7 +48,9 @@ public class CategoriaController(CategoriaAppService categoriaService) : Control
         Result<EditarCategoriaResult> result = await categoriaService.EditarAsync(command, cancellationToken);
 
         if (result.IsFailed)
+        {
             return BadRequest();
+        }
 
         EditarCategoriaResponse response = new(result.Value.Titulo);
 
@@ -63,7 +65,9 @@ public class CategoriaController(CategoriaAppService categoriaService) : Control
         Result result = await categoriaService.ExcluirAsync(command, cancellationToken);
 
         if (result.IsFailed)
+        {
             return BadRequest();
+        }
 
         return NoContent();
     }
@@ -79,7 +83,9 @@ public class CategoriaController(CategoriaAppService categoriaService) : Control
         Result<SelecionarCategoriasResult> result = await categoriaService.SelecionarTodosAsync(query, cancellationToken);
 
         if (result.IsFailed)
+        {
             return BadRequest();
+        }
 
         SelecionarCategoriasResponse response = new(result.Value.Registros);
 
@@ -94,7 +100,9 @@ public class CategoriaController(CategoriaAppService categoriaService) : Control
         Result<SelecionarCategoriaPorIdResult> result = await categoriaService.SelecionarPorIdAsync(query, cancellationToken);
 
         if (result.IsFailed)
+        {
             return NotFound(id);
+        }
 
         SelecionarCategoriaPorIdResponse response = new(result.Value.Id, result.Value.Titulo);
 

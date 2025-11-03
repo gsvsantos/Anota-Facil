@@ -5,8 +5,5 @@ public class Categoria : Entidade
     public string Titulo { get; set; }
     public List<Nota> Notas { get; set; } = [];
 
-    public Categoria(string titulo)
-    {
-        Titulo = titulo;
-    }
+    public Categoria(string titulo) => this.Titulo = titulo;
 }

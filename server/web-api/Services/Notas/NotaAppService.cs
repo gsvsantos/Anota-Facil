@@ -33,10 +33,14 @@ public class NotaAppService(
         }
 
         if (dbContext.Notas.Any(c => c.Titulo.Equals(command.Titulo)))
+        {
             return Result.Fail(ResultadosErro.RegistroDuplicadoErro($"Já existe uma nota com o título \"{command.Titulo}\""));
+        }
 
-        Nota nota = new(command.Titulo, command.Conteudo, command.CategoriaId);
-        nota.UsuarioId = tenantProvider.UsuarioId.GetValueOrDefault();
+        Nota nota = new(command.Titulo, command.Conteudo, command.CategoriaId)
+        {
+            UsuarioId = tenantProvider.UsuarioId.GetValueOrDefault()
+        };
 
         try
         {
@@ -77,14 +81,18 @@ public class NotaAppService(
         }
 
         if (dbContext.Notas.Any(c => !c.Id.Equals(command.Id) && c.Titulo.Equals(command.Titulo)))
+        {
             return Result.Fail(ResultadosErro.RegistroDuplicadoErro($"Já existe uma nota com o título \"{command.Titulo}\""));
+        }
 
         Nota? notaSelecionada = await dbContext.Notas
             .Include(x => x.Categoria)
             .FirstOrDefaultAsync(x => x.Id.Equals(command.Id), cancellationToken);
 
         if (notaSelecionada is null)
+        {
             return Result.Fail(ResultadosErro.RegistroNaoEncontradoErro(command.Id));
+        }
 
         try
         {
@@ -119,7 +127,9 @@ public class NotaAppService(
             .FirstOrDefaultAsync(x => x.Id.Equals(command.Id), cancellationToken);
 
         if (NotaSelecionada is null)
+        {
             return Result.Fail($"Nota {command.Id} não encontrada");
+        }
 
         dbContext.Remove(NotaSelecionada);
 
@@ -146,7 +156,9 @@ public class NotaAppService(
             .FirstOrDefaultAsync(x => x.Id.Equals(command.Id), cancellationToken);
 
         if (notaSelecionada is null)
+        {
             return Result.Fail($"Nota {command.Id} não encontrada");
+        }
 
         SelecionarNotaPorIdResult result = new(
             notaSelecionada.Id,

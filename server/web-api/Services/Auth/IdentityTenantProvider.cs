@@ -12,7 +12,9 @@ public class IdentityTenantProvider(IHttpContextAccessor contextAccessor) : ITen
             Claim? claimId = contextAccessor.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier);
 
             if (claimId is null)
+            {
                 return null;
+            }
 
             return Guid.Parse(claimId.Value);
         }

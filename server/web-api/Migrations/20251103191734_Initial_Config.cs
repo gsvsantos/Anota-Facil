@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace NoteKeeper.WebApi.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialConfig : Migration
+    public partial class Initial_Config : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -48,7 +48,9 @@ public class NotaController(NotaAppService notaService) : Controller
         Result<EditarNotaResult> result = await notaService.EditarAsync(command, cancellationToken);
 
         if (result.IsFailed)
+        {
             return BadRequest();
+        }
 
         EditarNotaResponse response = new(result.Value.Titulo, result.Value.Conteudo, result.Value.CategoriaId);
 
@@ -63,7 +65,9 @@ public class NotaController(NotaAppService notaService) : Controller
         Result result = await notaService.ExcluirAsync(command, cancellationToken);
 
         if (result.IsFailed)
+        {
             return BadRequest();
+        }
 
         return NoContent();
     }
@@ -79,7 +83,9 @@ public class NotaController(NotaAppService notaService) : Controller
         Result<SelecionarNotasResult> result = await notaService.SelecionarTodosAsync(query, cancellationToken);
 
         if (result.IsFailed)
+        {
             return BadRequest();
+        }
 
         SelecionarNotasResponse response = new(result.Value.Registros);
 
@@ -94,7 +100,9 @@ public class NotaController(NotaAppService notaService) : Controller
         Result<SelecionarNotaPorIdResult> result = await notaService.SelecionarPorIdAsync(query, cancellationToken);
 
         if (result.IsFailed)
+        {
             return NotFound(id);
+        }
 
         SelecionarNotaPorIdResponse response = new(
             result.Value.Id,

@@ -15,28 +15,32 @@ public class AccessTokenProvider
     public AccessTokenProvider(IConfiguration config)
     {
         if (string.IsNullOrEmpty(config["JWT_GENERATION_KEY"]))
+        {
             throw new ArgumentException("Cifra de geração de tokens não configurada");
+        }
 
-        chaveAssinaturaJwt = config["JWT_GENERATION_KEY"]!;
+        this.chaveAssinaturaJwt = config["JWT_GENERATION_KEY"]!;
 
         if (string.IsNullOrEmpty(config["JWT_AUDIENCE_DOMAIN"]))
+        {
             throw new ArgumentException("Audiência válida para transmissão de tokens não configurada");
+        }
 
-        audienciaValida = config["JWT_AUDIENCE_DOMAIN"]!;
+        this.audienciaValida = config["JWT_AUDIENCE_DOMAIN"]!;
 
-        expiracaoJwt = DateTime.UtcNow.AddMinutes(5);
+        this.expiracaoJwt = DateTime.UtcNow.AddMinutes(5);
     }
 
     public AccessToken GerarAccessToken(Usuario usuario)
     {
         JwtSecurityTokenHandler tokenHandler = new();
 
-        byte[] chaveEmBytes = Encoding.ASCII.GetBytes(chaveAssinaturaJwt!);
+        byte[] chaveEmBytes = Encoding.ASCII.GetBytes(this.chaveAssinaturaJwt!);
 
         SecurityTokenDescriptor tokenDescriptor = new()
         {
             Issuer = "NoteKeeper",
-            Audience = audienciaValida,
+            Audience = this.audienciaValida,
             Subject = new ClaimsIdentity(
             [
                 new Claim(JwtRegisteredClaimNames.Sub, usuario.Id.ToString()),
@@ -48,7 +52,7 @@ public class AccessTokenProvider
                 new SymmetricSecurityKey(chaveEmBytes),
                 SecurityAlgorithms.HmacSha256Signature
             ),
-            Expires = expiracaoJwt
+            Expires = this.expiracaoJwt
         };
 
         SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
@@ -57,7 +61,7 @@ public class AccessTokenProvider
 
         return new AccessToken(
             tokenString,
-            expiracaoJwt,
+            this.expiracaoJwt,
              new UsuarioAutenticado(
                 usuario.Id,
                 usuario.FullName ?? string.Empty,

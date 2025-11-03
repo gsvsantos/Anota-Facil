@@ -14,7 +14,9 @@ public class AutenticacaoAppService(
     public async Task<Result<AccessToken>> RegistrarAsync(RegistrarUsuarioCommand command)
     {
         if (!command.Senha.Equals(command.ConfirmarSenha))
+        {
             return Result.Fail(ResultadosErro.RequisicaoInvalidaErro("A confirmação de senha falhou."));
+        }
 
         Usuario usuario = new()
         {
@@ -48,7 +50,9 @@ public class AutenticacaoAppService(
         AccessToken? accessToken = accessTokenProvider.GerarAccessToken(usuario);
 
         if (accessToken is null)
+        {
             return Result.Fail(ResultadosErro.ExcecaoInternaErro(new Exception("Falha ao gerar token de acesso.")));
+        }
 
         return Result.Ok(accessToken);
     }
@@ -58,7 +62,9 @@ public class AutenticacaoAppService(
         Usuario? usuarioEncontrado = await userManager.FindByEmailAsync(command.Email);
 
         if (usuarioEncontrado is null)
+        {
             return Result.Fail(ResultadosErro.RegistroNaoEncontradoErro("Não foi possível encontrar o usuário requisitado."));
+        }
 
         bool credenciaisValidas = await userManager.CheckPasswordAsync(
             usuarioEncontrado,
@@ -66,7 +72,9 @@ public class AutenticacaoAppService(
         );
 
         if (!credenciaisValidas)
+        {
             return Result.Fail(ResultadosErro.RequisicaoInvalidaErro("Login ou senha incorretos."));
+        }
 
         AccessToken accessToken = accessTokenProvider.GerarAccessToken(usuarioEncontrado);
 
@@ -78,7 +86,9 @@ public class AutenticacaoAppService(
         Usuario? usuarioEncontrado = dbContext.Users.Find(command.UsuarioId);
 
         if (usuarioEncontrado is null)
+        {
             return Result.Fail(ResultadosErro.RegistroNaoEncontradoErro("Não foi possível encontrar o usuário requisitado."));
+        }
 
         usuarioEncontrado.AccessTokenVersionId = Guid.NewGuid();
 

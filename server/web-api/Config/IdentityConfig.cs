@@ -37,14 +37,18 @@ public static class IdentityConfig
         string? chaveAssinaturaJwt = configuration["JWT_GENERATION_KEY"];
 
         if (chaveAssinaturaJwt is null)
+        {
             throw new ArgumentException("Não foi possível obter a chave de assinatura de tokens.");
+        }
 
         byte[] chaveEmBytes = Encoding.ASCII.GetBytes(chaveAssinaturaJwt);
 
         string? audienciaValida = configuration["JWT_AUDIENCE_DOMAIN"];
 
         if (audienciaValida is null)
+        {
             throw new ArgumentException("Não foi possível obter o domínio da audiência dos tokens.");
+        }
 
         services.AddAuthentication(options =>
         {
