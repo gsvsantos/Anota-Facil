@@ -15,9 +15,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class App {
   private readonly authService = inject(AuthService);
+  protected readonly notificacaoService = inject(NotificacaoService);
   protected readonly router = inject(Router);
   protected readonly accessToken$ = this.authService.accessToken$;
-  protected readonly notificacaoService = inject(NotificacaoService);
 
   public logout(): void {
     const sairObserver: PartialObserver<null> = {
