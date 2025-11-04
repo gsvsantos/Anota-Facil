@@ -10,13 +10,11 @@ export class NotificacaoService {
       panelClass: ['notificacao-sucesso'],
     });
   }
-
   public alerta(mensagem: string, acao: string): void {
     this.snackBar.open(mensagem, acao, {
       panelClass: ['notificacao-alerta'],
     });
   }
-
   public erro(mensagem: string, acao: string): void {
     this.snackBar.open(mensagem, acao, {
       panelClass: ['notificacao-erro'],
