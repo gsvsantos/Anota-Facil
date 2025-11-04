@@ -31,15 +31,11 @@ public class Program
 
         WebApplication app = builder.Build();
 
-        // Migrações do EntityFramework
-        if (app.Environment.IsDevelopment())
-        {
-            IServiceScope scope = app.Services.CreateScope();
+        IServiceScope scope = app.Services.CreateScope();
 
-            AppDbContext dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        AppDbContext dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
-            dbContext.Database.Migrate();
-        }
+        dbContext.Database.Migrate();
 
         if (app.Environment.IsDevelopment())
         {
