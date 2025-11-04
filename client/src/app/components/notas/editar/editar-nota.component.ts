@@ -23,6 +23,7 @@ import {
   EditarNotaApiResponse,
   EditarNotaModel,
 } from '../../../models/nota.models';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'af-editar-nota.component',
@@ -88,7 +89,7 @@ export class EditarNota {
           `O registro "${editarNotaModel.titulo}" foi editado com sucesso!`,
           'OK',
         ),
-      error: (err: string) => this.notificacaoService.erro(err, 'OK'),
+      error: (err: HttpErrorResponse) => this.notificacaoService.erro(err.error as string, 'OK'),
       complete: () => void this.router.navigate(['/notas']),
     };
 

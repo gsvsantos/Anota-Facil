@@ -17,6 +17,7 @@ import { CategoriaService } from '../../../services/categoria.service';
 import { Observer } from 'rxjs';
 import { Router, RouterLink } from '@angular/router';
 import { NotificacaoService } from '../../../services/notificacao.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'af-cadastrar-categoria',
@@ -58,7 +59,7 @@ export class CadastrarCategoria {
           `Registro "${cadastrarCategoriaModel.titulo}" cadastrado com sucesso!`,
           'OK',
         ),
-      error: (err: string) => this.notificacaoService.erro(err, 'OK'),
+      error: (err: HttpErrorResponse) => this.notificacaoService.erro(err.error as string, 'OK'),
       complete: () => void this.router.navigate(['/categorias']),
     };
 

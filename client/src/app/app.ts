@@ -21,7 +21,7 @@ export class App {
 
   public logout(): void {
     const sairObserver: PartialObserver<null> = {
-      error: (err: HttpErrorResponse) => this.notificacaoService.erro(err.message, 'OK'),
+      error: (err: HttpErrorResponse) => this.notificacaoService.erro(err.error as string, 'OK'),
       complete: () => void this.router.navigate(['/auth', 'login']),
     };
 

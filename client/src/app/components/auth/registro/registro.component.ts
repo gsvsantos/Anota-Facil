@@ -67,7 +67,7 @@ export class Registro {
     const registroModel: RegistroModel = this.formGroup.value as RegistroModel;
 
     const registroObserver: PartialObserver<AccessTokenModel> = {
-      error: (err: HttpErrorResponse) => this.notificacaoService.erro(err.message, 'OK'),
+      error: (err: HttpErrorResponse) => this.notificacaoService.erro(err.error as string, 'OK'),
       complete: () => void this.router.navigate(['/inicio']),
     };
 

@@ -11,6 +11,7 @@ import { NotificacaoService } from '../../../services/notificacao.service';
 import { Observable, filter, map, shareReplay, Observer, take, switchMap } from 'rxjs';
 import { DetalhesNotaApiResponse } from '../../../models/nota.models';
 import { NotaService } from '../../../services/nota.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-excluir-nota.component',
@@ -42,7 +43,7 @@ export class ExcluirNota {
   public excluir(): void {
     const exclusaoObserver: Observer<null> = {
       next: () => this.notificacaoService.sucesso('O registro foi excluído com sucesso!', 'OK'),
-      error: (err: string) => this.notificacaoService.erro(err, 'OK'),
+      error: (err: HttpErrorResponse) => this.notificacaoService.erro(err.error as string, 'OK'),
       complete: () => void this.router.navigate(['/notas']),
     };
 

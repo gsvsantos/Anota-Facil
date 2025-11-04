@@ -20,6 +20,7 @@ import { NotificacaoService } from '../../../services/notificacao.service';
 import { filter, map, Observer } from 'rxjs';
 import { ListagemCategoriasModel } from '../../../models/categoria.models';
 import { CadastrarNotaApiResponse, CadastrarNotaModel } from '../../../models/nota.models';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'af-cadastrar-nota.component',
@@ -78,7 +79,7 @@ export class CadastrarNota {
           `O registro "${cadastrarNotaModel.titulo}" foi cadastrado com sucesso!`,
           'OK',
         ),
-      error: (err: string) => this.notificacaoService.erro(err, 'OK'),
+      error: (err: HttpErrorResponse) => this.notificacaoService.erro(err.error as string, 'OK'),
       complete: () => void this.router.navigate(['/notas']),
     };
 

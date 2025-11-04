@@ -57,7 +57,10 @@ export class Login {
     const loginModel: LoginModel = this.formGroup.value as LoginModel;
 
     const loginObserver: PartialObserver<AccessTokenModel> = {
-      error: (err: HttpErrorResponse) => this.notificacaoService.erro(err.message, 'OK'),
+      error: (err: HttpErrorResponse) => (
+        console.log(err),
+        this.notificacaoService.erro(err.error as string, 'OK')
+      ),
       complete: () => void this.router.navigate(['/inicio']),
     };
 

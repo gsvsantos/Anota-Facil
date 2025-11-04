@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { DetalhesCategoriaApiResponse } from '../../../models/categoria.models';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'af-excluir-categoria.component',
@@ -42,7 +43,7 @@ export class ExcluirCategoria {
   public excluir(): void {
     const exclusaoObserver: Observer<null> = {
       next: () => this.notificacaoService.sucesso(`Registro excluído com sucesso!`, 'OK'),
-      error: (err: string) => this.notificacaoService.erro(err, 'OK'),
+      error: (err: HttpErrorResponse) => this.notificacaoService.erro(err.error as string, 'OK'),
       complete: () => void this.router.navigate(['/categorias']),
     };
 

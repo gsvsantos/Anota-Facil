@@ -21,6 +21,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { filter, map, Observer, shareReplay, switchMap, take, tap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'af-editar-categoria.component',
@@ -70,7 +71,7 @@ export class EditarCategoria {
           `Registro "${editarCategoriaModel.titulo}" foi editado com sucesso!`,
           'OK',
         ),
-      error: (err: string) => this.notificacaoService.erro(err, 'OK'),
+      error: (err: HttpErrorResponse) => this.notificacaoService.erro(err.error as string, 'OK'),
       complete: () => void this.router.navigate(['/categorias']),
     };
 
