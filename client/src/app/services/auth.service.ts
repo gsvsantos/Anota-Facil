@@ -18,7 +18,7 @@ import { obterOpcoesHeaderAutorizacao } from '../utils/obter-header-autorizacao'
 @Injectable()
 export class AuthService {
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = environment.apiUrl + 'auth';
+  private readonly apiUrl = environment.apiUrl + '/auth';
   private readonly accessTokenKey: string = 'notekeeper:access-token';
 
   public readonly accessTokenSubject$ = new BehaviorSubject<AccessTokenModel | undefined>(
